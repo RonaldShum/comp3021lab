@@ -1,8 +1,13 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
-import com.sun.xml.internal.fastinfoset.algorithm.BooleanEncodingAlgorithm;
+
 
 public class NoteBook {
 	
@@ -10,6 +15,26 @@ public class NoteBook {
 	
 	public NoteBook(){
 		folders = new ArrayList<Folder>();
+	}
+	
+	public List<Note> searchNotes(String keywords){
+		List<Note> fin = new ArrayList<Note>();
+		for(Folder i : folders){
+			
+			fin.addAll(i.searchNotes(keywords));
+		}
+		return fin;
+	}
+	
+	public void sortFolders(){
+		for(Folder i: folders){
+			i.sortNotes();
+		}
+		Collections.sort(folders);
+	}
+	public boolean createTextNote(String folderName,String title,String content){
+		TextNote note = new TextNote(title,content);
+		return insertNote(folderName,note);
 	}
 	
 	public boolean createTextNote(String folderName,String title){

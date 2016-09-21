@@ -1,11 +1,90 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Folder {
+import com.sun.corba.se.spi.ior.TaggedProfileTemplate;
+import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
+
+
+
+
+public class Folder implements Comparable<Folder>{
 	
 	private ArrayList<Note> notes;
 	private String name;
+	
+	public List<Note> searchNotes(String keywords){
+		List<Note> fin = new ArrayList<Note>();
+		
+		keywords = keywords.toLowerCase();
+		
+		String[] key = keywords.split(" ");
+		System.out.println(key.length);
+		//check title only
+		for(int i = 0; i < key.length;i++){
+			System.out.println(key[i]);
+			System.out.println("the number of i = " +i);
+			
+			if( (i+2) < key.length && key[i+1].equals("or") ){
+				List<Note> temp = new ArrayList<>();
+				System.out.println("here");
+				
+				//Add notes to temp1 or temp2 but not both
+				for(Note j: notes){
+					if(j.getTitle().toLowerCase().contains(key[i])|| j.getTitle().toLowerCase().contains(key[i+2])){
+						temp.add(j);
+					}else if(j instanceof TextNote && ((TextNote) j).getContent().contains(key[i])) {
+						temp.add(j);
+					}else if(j instanceof TextNote && ((TextNote) j).getContent().contains(key[i+2])){
+						temp.add(j);
+					}
+				}
+				//Add i 
+				
+				
+				
+				
+				if(!fin.isEmpty() && !temp.isEmpty()){
+					fin.retainAll(temp);
+				}else if(!temp.isEmpty()){
+					fin.addAll(temp);
+				}
+				i = i+2;
+			}else{
+				List<Note> temp = new ArrayList<Note>();
+				//create a temp list that contains the keyword
+				for(Note j: notes){
+					if(j.getTitle().toLowerCase().contains(key[i])){
+						temp.add(j);
+					}else if(j instanceof TextNote && ((TextNote) j).getContent().contains(key[i])){
+						temp.add(j);
+					}
+				}
+				
+				if(!fin.isEmpty() && !temp.isEmpty()){
+					fin.retainAll(temp);
+					
+				}else if(!temp.isEmpty()){
+					fin.addAll(temp);
+				}
+			}
+			System.out.println("number of i in the end = " +i);
+		}
+		
+		return fin;
+		
+		
+	}
+	
+	public void sortNotes(){
+		Collections.sort(notes);
+	}
+	
+	public int compareTo(Folder o){
+		return (this.name.compareTo(o.name));
+	}
 	
 	public Folder(String name){
 		this.name = name;

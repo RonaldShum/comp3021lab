@@ -2,15 +2,30 @@ package base;
 
 import java.sql.Date;
 
-public class Note {
+public class Note implements Comparable<Note>{
 	private Date date;
 	private String title;
 	
-	
+	public int compareTo(Note o){
+		long date1 = this.date.getTime();
+		long date2 = o.date.getTime();
+		
+		if(date1 > date2){
+			return -1;
+		}else if(date1 < date2){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
 		
 	public Note(String title){
 		this.title = title;
 		date = new Date(System.currentTimeMillis());
+	}
+	
+	public String toString(){
+		return date.toString() + "\t" + title;
 	}
 	
 	public String getTitle(){

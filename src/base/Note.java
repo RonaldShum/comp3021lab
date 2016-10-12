@@ -1,10 +1,12 @@
 package base;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Note implements Comparable<Note>{
+public class Note implements Comparable<Note>,Serializable{
 	private Date date;
 	private String title;
+	private static final long serialVersionUID = 1L;
 	
 	public int compareTo(Note o){
 		long date1 = this.date.getTime();

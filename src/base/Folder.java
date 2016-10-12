@@ -1,5 +1,6 @@
 package base;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,10 +11,11 @@ import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
 
 
-public class Folder implements Comparable<Folder>{
+public class Folder implements Comparable<Folder>,Serializable{
 	
 	private ArrayList<Note> notes;
 	private String name;
+	private static final long serialVerionUID = 1L;
 	
 	public List<Note> searchNotes(String keywords){
 		List<Note> fin = new ArrayList<Note>();

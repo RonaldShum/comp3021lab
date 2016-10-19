@@ -58,10 +58,13 @@ public class Folder implements Comparable<Folder>,Serializable{
 				List<Note> temp = new ArrayList<Note>();
 				//create a temp list that contains the keyword
 				for(Note j: notes){
+					System.out.println("main part of");
 					if(j.getTitle().toLowerCase().contains(key[i])){
+						System.out.println("title part ");
 						temp.add(j);
-					}else if(j instanceof TextNote && ((TextNote) j).getContent().contains(key[i])){
+					}else if(j instanceof TextNote && ((TextNote) j).getContent().toLowerCase().contains(key[i])){
 						temp.add(j);
+						System.out.println("content part");
 					}
 				}
 				

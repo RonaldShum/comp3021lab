@@ -38,7 +38,7 @@ public class JUnitTest {
 	// Design the second test case which reveals the bug in function unknownFunction()
 	@Test
 	public void testCountLetter(){
-		TextNote tn = new TextNote("a", "bcdaaaAAAAA");
+		TextNote tn = new TextNote("A", "AAAAA");
 		Character output = tn.countLetters();
 		Character expected = 'A';
 		System.out.println("output: "+output);

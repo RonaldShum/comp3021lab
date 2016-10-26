@@ -22,6 +22,7 @@ public class TextNote extends Note implements Serializable{
 	
 	public TextNote(String title){
 		super(title);
+		content="";
 	}
 	
 	public TextNote(String title,String content){
@@ -100,6 +101,10 @@ public class TextNote extends Note implements Serializable{
 			}
 		}
 		return r;
+	}
+	
+	public void changeContent(String change){
+		content = new String(change);
 	}
 	
 	public String getContent(){
